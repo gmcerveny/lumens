@@ -13,7 +13,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/0.8.0/stellar-sdk.min.js"></script>
   <script>
-    var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+    var server = new StellarSdk.Server('https://horizon.stellar.org');
 
     // Get a message any time a payment occurs. Cursor is set to "now" to be notified
     // of payments happening starting from when this script runs (as opposed to from
@@ -22,8 +22,11 @@
       .cursor('now')
       .stream({
         onmessage: function (message) {
-          console.log(message);
-          gotPayment()
+          if (message.type == "payment") {
+            gotPayment(message.from, message.to, message.amount)
+          } else {
+            console.log(message.type, message);  
+          }
         }
       })
 
