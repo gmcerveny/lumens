@@ -4,9 +4,12 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Stellar Test</title>
+  <title>Stellar Test Stream</title>
   <meta name="description" content="Stellar Test">
   <meta name="author" content="Greg Cerveny">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+  <script src="./sketch.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/0.8.0/stellar-sdk.min.js"></script>
   <script>
@@ -20,6 +23,7 @@
       .stream({
         onmessage: function (message) {
           console.log(message);
+          gotPayment()
         }
       })
 
