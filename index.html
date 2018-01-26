@@ -9,10 +9,26 @@
   <meta name="author" content="Greg Cerveny">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/0.8.0/stellar-sdk.min.js"></script>
-  <script>console.log(StellarSdk);</script>
+  <script>
+    var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+
+    // Get a message any time a payment occurs. Cursor is set to "now" to be notified
+    // of payments happening starting from when this script runs (as opposed to from
+    // the beginning of time).
+    var es = server.payments()
+      .cursor('now')
+      .stream({
+        onmessage: function (message) {
+          console.log(message);
+        }
+      })
+
+  </script>
+
 </head>
 
 <body>
+  <h1>Test Stream</h1>
 
 </body>
 
